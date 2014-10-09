@@ -1,3 +1,36 @@
+::selection {
+  color: #fff;
+  background-color: #28282e;
+}
+
+::-moz-selection {
+  color: #fff;
+  background-color: #28282e;
+}
+
+.tweak-dash {
+    border: 1px solid;
+    width: 5%;
+}
+
+.tweak-wrapper {
+    width: 100%;
+}
+.tweak-subtitle {
+    border: 1px solid;
+    display: inline-block;
+    width: 5%;
+}
+.tweak-content {
+    display: inline;
+    width: 100%;
+    color: red;
+    font-family: serif;
+    margin-left: 10px;
+    font-size: 12pt;
+}
+
+
 .header {
     background: rgba(black,0.7);
     width: 100%;
@@ -65,12 +98,119 @@
     width: 100%;
     position: relative;
     .section-panel:first-child {
-        padding-top: 0 !important;
+        padding: 0 !important;
     }
     .section-panel {
-        padding-top: 10px;
+        padding: 60px 0;
+    }
+    .section-panel.ourservices {
+        background: #f6f6f6;
+    }
+    .section-panel.ourworks {
+        background: #fff;
+    }
+    .section-panel.whoarewe {
+        background: #f6f6f6;
     }
 }
+
+
+.row-title {
+    h1 {
+    font-weight: 700;
+    }
+}
+.row-desc {
+    padding: 25px 0;
+    p {
+        font-weight: 300;
+        font-size: initial;
+    }
+    
+    .square-group-3 {
+        .square-rotate {
+            overflow: hidden;
+            margin: 40px 0;
+            height: 110px;
+            width: 110px;
+            background: #fff;
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            transform: rotate(45deg);
+            .square-rotate-content {
+                margin-left: -30px;
+                padding-top: 25px;
+                -webkit-transform: rotate(-45deg);
+                -ms-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+                img {
+                    margin: 0 auto;
+                    margin-left: 40%;
+                }
+                p {
+                    font-weight: bold;
+                    font-size: 8pt;
+                    text-align: center;
+                }
+            }
+        }
+        .square-rotate:hover, a {
+            background: #28282e;
+            color: #fff;
+        }
+        .square-rotate:first-child {
+            margin: 0 !important;
+            margin-left: 168px !important;
+            margin-bottom: -26px !important;
+        }
+        .square-rotate:nth-child(2) {
+            margin-top: 0 !important;
+            margin-left: 84px !important;
+            margin-bottom: -26px !important;
+        }
+        .square-rotate:nth-child(3) {
+            margin: 0 !important;
+        }
+    }
+    .square-group-3.team {
+        .square-rotate-content {
+            position: relative;
+            img {
+                width: 116%;
+                margin-left: 9px;
+                margin-top: -38px;
+                z-index: -1;
+            }
+            p {
+                position: absolute;
+                display: none;
+            }
+        }
+        .square-rotate-content:hover p {
+            display: block;
+            width: 112%;
+            text-align: center;
+            background: rgba(#ef4035,0.9);
+            bottom: -10px;
+            left: 16px;
+            height: 52%;
+            padding: 7px;
+        }
+    }
+    .square-group-3:nth-child(2) {
+        margin-top: -278px !important;
+        margin-left: 170px !important;
+    }
+    .square-group-3:last-child {
+        margin-top: -278px !important;
+        margin-left: 340px !important;
+        margin-bottom: 110px !important;
+    }
+}
+
+
 .slider-container {
     //
     position: relative;
@@ -114,14 +254,15 @@
     }
     .slider-desc {
         text-align: left;
+        font-size: initial;
         //font-size: 12px;
-        padding-top: 15px;
+        padding: 15px 0;
     }
     .slider-btn {
         text-align: left;
-        padding-top: 35px;
+        padding-top: 45px;
         a {
-            border: 4px solid #fff;
+            border: 2px solid #fff;
             padding: 15px 20px;
             color: #fff;
             font-weight: bold;
