@@ -87,8 +87,13 @@
     background: #f6f6f6; }
   .page-content .section-panel.ourworks {
     background: #fff; }
+  .page-content .section-panel.projectsfeat {
+    background: #28282e;
+    color: #fff; }
   .page-content .section-panel.whoarewe {
     background: #f6f6f6; }
+  .page-content .section-panel.readourminds {
+    background: #fff; }
 
 .row-title h1 {
   font-weight: 700; }
@@ -161,6 +166,97 @@
     margin-top: -278px !important;
     margin-left: 340px !important;
     margin-bottom: 110px !important; }
+
+.row-btn {
+  text-align: left;
+  padding: 45px 0; }
+  .row-btn a {
+    border: 2px solid #fff;
+    padding: 15px 20px;
+    color: #fff;
+    font-weight: bold; }
+  .row-btn a:hover {
+    text-decoration: none;
+    color: #f6f6f6; }
+
+.row-present-slider {
+  position: relative; }
+  .row-present-slider ul {
+    padding: 0; }
+  .row-present-slider .presention {
+    position: relative;
+    overflow: hidden;
+    height: 385px; }
+    .row-present-slider .presention li {
+      list-style: none;
+      padding: 15px 0;
+      -webkit-transform: translateX(12%) translateY(0); }
+    .row-present-slider .presention li:first-child {
+      list-style: none;
+      padding: 0 !important; }
+  .row-present-slider .slider-icon {
+    position: relative;
+    margin-top: 10px;
+    padding: 5px 0;
+    background: #000; }
+    .row-present-slider .slider-icon li {
+      margin-left: 5%;
+      display: inline;
+      list-style: none; }
+  .row-present-slider .slider-indicator {
+    position: absolute;
+    margin-top: 10px;
+    margin-top: 130px;
+    top: 0;
+    right: 0; }
+    .row-present-slider .slider-indicator ul {
+      list-style: none; }
+    .row-present-slider .slider-indicator li {
+      margin-bottom: 10px; }
+
+.slider-indicator-bar {
+  border: 1px solid;
+  height: 24px;
+  width: 2px; }
+
+.row-table {
+  width: 100%; }
+
+.table-header {
+  border-bottom: 2px solid #e5e5e5;
+  display: flex;
+  color: #999999;
+  padding-bottom: 12px; }
+
+.table-content {
+  border-bottom: 2px solid #e5e5e5;
+  display: flex; }
+  .table-content .table-content-row {
+    padding: 25px 0;
+    width: 100%; }
+    .table-content .table-content-row .table-content-title {
+      font-size: 12pt;
+      font-weight: 300;
+      color: #333333; }
+
+.table-content-desc {
+  padding-top: 22px;
+  display: inline-block; }
+  .table-content-desc p {
+    color: #888888;
+    font-weight: 300;
+    font-size: initial; }
+
+.table-load-more {
+  text-align: center;
+  padding-top: 40px;
+  font-family: serif;
+  font-size: 14pt; }
+  .table-load-more a {
+    color: #ef443a; }
+  .table-load-more a:hover {
+    text-decoration: none;
+    color: #ef443a; }
 
 .slider-container {
   position: relative; }
