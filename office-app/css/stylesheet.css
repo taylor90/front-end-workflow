@@ -128,13 +128,32 @@
     font-weight: 300;
     font-size: initial; }
 
-.video-slideshow-content {
-  margin-top: 10px; }
-  .video-slideshow-content img {
+.video-slideshow-wrapper {
+  width: 780px;
+  overflow: hidden; }
+  .video-slideshow-wrapper .video-slideshow-slides {
+    display: block;
+    width: 6000px;
+    margin: 0;
+    padding: 0; }
+  .video-slideshow-wrapper .video-slideshow-slide {
+    list-style: none;
+    width: 780px;
+    float: left; }
+  .video-slideshow-wrapper img {
     width: 100%; }
 
 .video-slideshow-indicator {
   margin-top: 10px; }
+  .video-slideshow-indicator ul {
+    padding: 0;
+    margin: 0; }
+    .video-slideshow-indicator ul li {
+      float: left;
+      padding: 10px 10px 0 10px;
+      font-size: 20pt; }
+    .video-slideshow-indicator ul li.active {
+      color: #1e1e20; }
 
 .row-title h1 {
   font-weight: 700; }

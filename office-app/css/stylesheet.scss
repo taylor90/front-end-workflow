@@ -164,14 +164,41 @@
         font-size: initial;
     }
 }
-.video-slideshow-content {
-    margin-top: 10px;
+.video-slideshow-wrapper {
+    width: 780px;
+    //height: 400px;
+    overflow: hidden;
+    .video-slideshow-slides {
+        display: block;
+        width: 6000px;
+        //height: 400px;
+        margin: 0;
+        padding: 0;
+    }
+    .video-slideshow-slide {
+        list-style: none;
+        width: 780px;
+        //height: 400px;
+        float: left;
+    }
     img {
         width: 100%;
     }
 }
 .video-slideshow-indicator {
     margin-top: 10px;
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+            float: left;
+            padding: 10px 10px 0 10px;
+            font-size: 20pt;
+        }
+        li.active {
+            color: #1e1e20;
+        }
+    }
 }
 
 
