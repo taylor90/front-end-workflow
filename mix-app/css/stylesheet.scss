@@ -1,0 +1,14 @@
+@import"themecolor1";
+
+::selection {
+  color: $color6;
+  background-color: $color1; }
+
+::-moz-selection {
+  color: $color6;
+  background-color: $color1; }
+
+.header {
+    background: rgba($color1,1);
+    color: $color6;
+}
