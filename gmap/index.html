@@ -1,0 +1,241 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <style>
+            /* Always set the map height explicitly to define the size of the div
+            * element that contains the map. */
+            #map {
+            height: 90vh;
+            }
+            /* Optional: Makes the sample page fill the window. */
+            html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            }
+        </style>
+
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <input id="btnExport" value="get polyline data" type="button" />
+
+        <div id="map"></div>
+        <div id="output">Draw a polyline</div>
+        
+        <script>
+
+
+        //EXPORT POLYLINES empty array
+        var polylines = [];
+
+        var directionsDisplay,
+            directionsService,
+            google,
+            maps;
+            // This example adds a user-editable rectangle to the map.
+            function initMap() {
+                
+              var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 44.5452, lng: -78.5389},
+                zoom: 4
+              });
+      
+              var recBounds = {
+                north: 42.40899,
+                south: 44.490,
+                east: -68.443,
+                west: -78.649
+              };
+
+                
+            var triblueCoords = [
+            {lat: 25.774, lng: -60.190},
+            {lat: 18.466, lng: -46.118},
+            {lat: 32.321, lng: -44.757}
+            ];
+
+            var triredCoords = [
+            {lat: 25.774, lng: -80.190},
+            {lat: 18.466, lng: -66.118},
+            {lat: 32.321, lng: -64.757}
+            ];
+
+
+
+        var drawingManager = new google.maps.drawing.DrawingManager({
+          drawingMode: google.maps.drawing.OverlayType.MARKER,
+          drawingControl: true,
+          drawingControlOptions: {
+            position: google.maps.ControlPosition.TOP_CENTER,
+            drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+          },
+          markerOptions: {icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'},
+          circleOptions: {
+            fillColor: '#ffff00',
+            fillOpacity: 0.5,
+            strokeWeight: 1,
+            clickable: false,
+            editable: true,
+            draggable: true,
+            zIndex: 1
+          },
+          polygonOptions: {
+            fillColor: '#F0E68C',
+            fillOpacity: 0.5,
+            strokeWeight: 1,
+            clickable: false,
+            editable: true,
+            draggable: true,
+            zIndex: 1
+          },
+          polylineOptions: {
+            strokeWeight: 1,
+            clickable: false,
+            editable: true,
+            draggable: true,
+            geodesic: true,
+            zIndex: 1
+          },
+          rectangleOptions: {
+            fillColor: '#F0E68C',
+            fillOpacity: 0.5,
+            strokeWeight: 1,
+            clickable: false,
+            editable: true,
+            draggable: true,
+            zIndex: 1
+          }
+        });
+        drawingManager.setMap(map);
+        
+        
+
+    //add event listener For export
+    google.maps.event.addListener(drawingManager, 'polylinecomplete', function(polyline) {
+        polylines.push(polyline);
+        var polylinePath = polyline.getPath();
+        console.log("polyline : " + polylinePath.getArray());
+    });
+    google.maps.event.addDomListener(document.getElementById('btnExport'), 'click', function() {
+        var htmlStr = "";
+        for (var i = 0; i < polylines.length; i++) {
+        htmlStr += "polyline #" + i + " # vertices=" + polylines[i].getPath().getLength() + " length=" + google.maps.geometry.spherical.computeLength(polylines[i].getPath()).toFixed(2) + " km<br>";
+        for (var j = 0; j < +polylines[i].getPath().getLength(); j++) {
+            htmlStr += "&nbsp;&nbsp;" + polylines[i].getPath().getAt(j).toUrlValue(6) + "<br>";
+        }
+        }
+        console.log()
+        document.getElementById('output').innerHTML = htmlStr;
+    });
+
+            // Construct a draggable red triangle with geodesic set to true.
+            new google.maps.Polygon({
+            map: map,
+            paths: triredCoords,
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            draggable: true,
+            geodesic: true,
+            editable: true
+            });
+
+            // Construct a draggable blue triangle with geodesic set to false.
+            new google.maps.Polygon({
+            map: map,
+            paths: triblueCoords,
+            strokeColor: '#0000FF',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#0000FF',
+            fillOpacity: 0.35,
+            draggable: true,
+            geodesic: false,
+            editable: true
+            });
+     
+              // Define a rectangle and set its editable property to true.
+              var rectangle = new google.maps.Rectangle({
+                bounds: recBounds,
+                draggable: true,
+                editable: true
+              });
+              rectangle.setMap(map);
+
+
+    google.maps.event.addListener(map, 'click', function(event)
+    {
+        drawLine(event.latLng);
+    });
+
+                    /*
+                    google.maps.event.addListener(circle, 'radius_changed', function() {
+                    console.log(circle.getRadius());
+                    });
+
+                    google.maps.event.addListener(outerPath, 'set_at', function() {
+                    console.log('Vertex moved on outer path.');
+                    });
+
+                    google.maps.event.addListener(innerPath, 'insert_at', function() {
+                    console.log('Vertex removed from inner path.');
+                    });*/
+
+                    google.maps.event.addListener(rectangle, 'bounds_changed', function() {
+                    console.log('Bounds changed.');
+                    });  
+  //draw
+  $("#drawpoly a").click(function(e) {
+    e.preventDefault();
+
+    //disable()
+
+    google.maps.event.addDomListener(map.getDiv(),'mousedown',function(e){
+      drawFreeHand()
+    });
+
+  });
+
+            } //OF INIT
+
+  
+
+
+
+          </script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxOctj_Oe70wG0Pt7et5AiaWbiXV9ZSA0&libraries=drawing,geometry&callback=initMap">
+</script>
+
+
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+    </body>
+</html>
