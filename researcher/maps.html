@@ -1,0 +1,1546 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Ecologue</title>
+  <meta name="description" content="meta desc">
+  <link rel="stylesheet"href="css/material.css">
+  <link rel="stylesheet"href="js/datatable/datatables.css">
+	<link rel="stylesheet" href="css/jstree/default/style.min.css" />
+  <link rel="stylesheet"href="css/screen.css">
+  <link rel="stylesheet"href="js/datatable/jquery-ui/jquery-ui.css">
+  
+  <style>
+      /* Always set the map height explicitly to define the size of the div
+      * element that contains the map. */
+      #map {
+        height: 60vh;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .js-mode-map-edit-btn {
+        display: none;
+      }
+      .field-color-box {
+        text-indent: -9999px;
+        position: relative;
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        background: transparent;
+      }
+      .field-color-field {
+        display: inline-block;
+      }
+  </style>
+</head>
+
+<body>
+<div class="mdl-layout__container">
+  <div class="mdl-grid mdl-grid--no-spacing">
+    <div class="mdl-cell mdl-cell--12-col">
+      <header>
+        <ul class="menu">
+          <li>
+            <a href="#">
+              Affaire
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Session
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Mode
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Donnees
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Valorisation
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              Administration
+            </a>
+          </li>
+        </ul>
+        <!-- Right aligned menu below button -->
+        <div class="blk-menu-signin">
+          <button id="login-menu-actions"
+          class="mdl-button mdl-js-button mdl-button--icon">
+            <i class="icon-account_circle"></i>
+          </button>
+          <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+          for="login-menu-actions">
+            <li class="mdl-menu__item">Account</li>
+            <li class="mdl-menu__item">Settings</li>
+            <li class="mdl-menu__item">Logout</li>
+          </ul>
+        </div>
+      </header>
+    </div>
+  </div>
+  <div class="mdl-grid mdl-grid--no-spacing">
+    <div class="mdl-cell mdl-cell--2-col navigation">
+      <div>
+
+      <div class="js-menu-tree">
+          <ul>
+              <li data-jstree='{ "opened" : true }'>IPA <span data-color-item="#fff" class="js-menu-color-item menu-tree-item-color"></span>
+                <ul>
+                  <li data-jstree='{ "opened" : true }'>IPA 1 <span data-color-item="#00FFFF" class="js-menu-color-item menu-tree-item-color"></span>
+                    <ul>
+                        <li data-jstree='{ "selected" : true }'>Espece A (8) <span data-color-item="#000" class="js-menu-color-item menu-tree-item-color"></span></li>
+                        <li>Espece B (2) <span data-color-item="#DCDCDC" class="js-menu-color-item menu-tree-item-color"></span></li>
+                        <li>Espece C [?] (1) <span data-color-item="#000" class="js-menu-color-item menu-tree-item-color"></span></li>
+                    </ul>
+                  </li>
+                  <li>IPA 2 <span data-color-item="#00FFFF" class="js-menu-color-item menu-tree-item-color"></span>
+                      <ul>
+                        <li>Espece D (8) <span data-color-item="#000" class="js-menu-color-item menu-tree-item-color"></span></li>
+                        <li>Espece E (2) <span data-color-item="#DCDCDC" class="js-menu-color-item menu-tree-item-color"></span></li>
+                        <li>Espece F [?] (1) <span data-color-item="#000" class="js-menu-color-item menu-tree-item-color"></span></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li>Rhopalo <span data-color-item="#00ccff" class="js-menu-color-item menu-tree-item-color"></span>
+                <ul>
+                    <li>Rhopalo 1 <span data-color-item="#00ccff" class="js-menu-color-item menu-tree-item-color"></span>
+                      <ul>
+                          <li>Espece G (6) <span data-color-item="#000" class="js-menu-color-item menu-tree-item-color"></span></li>
+                          <li>Espece H (1) <span data-color-item="#fff" class="js-menu-color-item menu-tree-item-color"></span></li>
+                          <li>Espece I (4) <span data-color-item="#00ccff" class="js-menu-color-item menu-tree-item-color"></span></li>
+                      </ul>
+                    </li>
+                    <li>Rhopalo 2 <span data-color-item="#00ccff" class="js-menu-color-item menu-tree-item-color"></span>
+                      <ul>
+                          <li>Espece J (6) <span data-color-item="#FF000" class="js-menu-color-item menu-tree-item-color"></span></li>
+                          <li>Espece K (1) <span data-color-item="#FFF000" class="js-menu-color-item menu-tree-item-color"></span></li>
+                          <li>Espece L (4) <span data-color-item="#00FFFF" class="js-menu-color-item menu-tree-item-color"></span></li>
+                      </ul>
+                    </li>
+                </ul>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="mdl-cell mdl-cell--10-col mainContent">
+      <div class="mdl-grid mdl-grid--no-spacing">
+        <div class="mdl-cell mdl-cell--9-col blockMain">
+          <div class="screenMode">
+            <span>
+              <em>Normal</em>
+              <em>Elargir</em>
+            </span>
+          </div>
+          
+          <div class="mdl-cell mdl-cell--12-col">
+            <div>
+              <p>Filter by Protocols :
+                <select id="filterByEspece" class="js-select-espece" onchange="filterByEspece(this.value);">
+                  <option value="">select a category</option>
+                </select> 
+              </p>
+            </div>
+            <div>
+              <button id="btnExport" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect js-mode-map-build">
+                Save
+              </button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect js-mode-map-edit">
+                Edit Mode
+              </button>
+              <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect js-mode-map-build">
+                Build Mode
+              </button>
+            </div>
+            <br>
+      
+            <div id="map"></div>
+            <div id="output">Draw your shapes</div>
+            <!-- Dailog for markers -->
+            <div id="dialog-marker" title="Marker Details">
+              <p><small>* all fields are required.</small></p>
+              <form id="c-m-espece" action="/" method="POST">
+                <fieldset>
+                  <div>
+                    <label for="c-m-espece-label">Label * :</label>
+                    <input type="text" id="c-m-espece-label">
+                  </div>
+                  <div>
+                    <label for="c-m-espece-category">category * :</label>
+                    <select id="c-m-espece-category" class="js-select-espece">
+                      <option value="">select a category</option>
+                    </select> 
+                  </div>
+                  <div>
+                    <label for="c-m-espece-color">color *:</label><br>
+                    <!-- <input type="text" id="c-m-espece-color"><br> -->
+                    <div class="field-color-wrapper">
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#000" checked="checked"><span class="field-color-box" style="background: #000;">BLACK</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#1abc9c"><span class="field-color-box" style="background: #1abc9c;">#1abc9c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#2ecc71"><span class="field-color-box" style="background: #2ecc71;">#2ecc71</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#3498db"><span class="field-color-box" style="background: #3498db;">#3498db</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#9b59b6"><span class="field-color-box" style="background: #9b59b6;">#9b59b6</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#34495e"><span class="field-color-box" style="background: #34495e;">#34495e</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#f1c40f"><span class="field-color-box" style="background: #f1c40f;">#f1c40f</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#e67e22"><span class="field-color-box" style="background: #e67e22;">#e67e22</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#e74c3c"><span class="field-color-box" style="background: #e74c3c;">#e74c3c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#ecf0f1"><span class="field-color-box" style="background: #ecf0f1;">#ecf0f1</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-m-espece-color" value="#95a5a6"><span class="field-color-box" style="background: #95a5a6;">#95a5a6</span></div>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="c-m-espece-desc">Description *:</label>
+                    <textarea id="c-m-espece-desc" name="c-m-espece-desc" rows="5"></textarea>
+                  </div>
+                  <div>
+                    <input id="c-m-espece-submit" type="submit" tabindex="-1">
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+      
+            <!-- Dailog for markers edit -->
+            <div id="dialog-marker-edit" title="Marker Edit Details">
+                <p><small>* all fields are required.</small></p>
+                <form id="c-m-edit-espece" action="/" method="POST">
+                  <fieldset>
+                    <div>
+                      <label for="c-m-edit-espece-label">Label * :</label>
+                      <input type="text" id="c-m-edit-espece-label">
+                    </div>
+                    <div>
+                      <label for="c-m-edit-espece-category">category * :</label>
+                      <select id="c-m-edit-espece-category" class="js-select-espece">
+                        <option value="">select a category</option>
+                      </select> 
+                    </div>
+                    <div>
+                      <label for="c-m-edit-espece-color">color *:</label>
+                      <!-- <input type="text" id="c-m-edit-espece-color"> -->
+                      <div class="field-color-wrapper">
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#000" checked="checked"><span class="field-color-box" style="background: #000;">BLACK</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#1abc9c"><span class="field-color-box" style="background: #1abc9c;">#1abc9c</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#2ecc71"><span class="field-color-box" style="background: #2ecc71;">#2ecc71</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#3498db"><span class="field-color-box" style="background: #3498db;">#3498db</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#9b59b6"><span class="field-color-box" style="background: #9b59b6;">#9b59b6</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#34495e"><span class="field-color-box" style="background: #34495e;">#34495e</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#f1c40f"><span class="field-color-box" style="background: #f1c40f;">#f1c40f</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#e67e22"><span class="field-color-box" style="background: #e67e22;">#e67e22</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#e74c3c"><span class="field-color-box" style="background: #e74c3c;">#e74c3c</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#ecf0f1"><span class="field-color-box" style="background: #ecf0f1;">#ecf0f1</span></div>
+                        <div class="field-color-field"><input type="radio" name="c-m-edit-espece-color" value="#95a5a6"><span class="field-color-box" style="background: #95a5a6;">#95a5a6</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <label for="c-m-edit-espece-desc">Description *:</label>
+                      <textarea id="c-m-edit-espece-desc" name="c-m-espece-desc" rows="5"></textarea>
+                    </div>
+                    <div>
+                      <input id="c-m-edit-espece-submit" type="submit" tabindex="-1">
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            
+            <!-- Dailog for Circles -->
+            <div id="dialog-circle" title="Circle Details">
+              <p><small>* all fields are required.</small></p>
+              <form id="c-c-espece" action="/" method="POST">
+                <fieldset>
+                  <div>
+                    <label for="c-c-espece-label">Label * :</label>
+                    <input type="text" id="c-c-espece-label">
+                  </div>
+                  <div>
+                    <label for="c-c-espece-category">category * :</label>
+                    <select id="c-c-espece-category" class="js-select-espece">
+                      <option value="">select a category</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="c-c-espece-color">color *:</label>
+                    <!-- <input type="text" id="c-c-espece-color"> -->
+                    <div class="field-color-wrapper">
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#000" checked="checked"><span class="field-color-box" style="background: #000;">BLACK</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#1abc9c"><span class="field-color-box" style="background: #1abc9c;">#1abc9c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#2ecc71"><span class="field-color-box" style="background: #2ecc71;">#2ecc71</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#3498db"><span class="field-color-box" style="background: #3498db;">#3498db</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#9b59b6"><span class="field-color-box" style="background: #9b59b6;">#9b59b6</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#34495e"><span class="field-color-box" style="background: #34495e;">#34495e</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#f1c40f"><span class="field-color-box" style="background: #f1c40f;">#f1c40f</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#e67e22"><span class="field-color-box" style="background: #e67e22;">#e67e22</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#e74c3c"><span class="field-color-box" style="background: #e74c3c;">#e74c3c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#ecf0f1"><span class="field-color-box" style="background: #ecf0f1;">#ecf0f1</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-c-espece-color" value="#95a5a6"><span class="field-color-box" style="background: #95a5a6;">#95a5a6</span></div>
+                    </div>
+                  </div>
+                  <div>
+                    <input id="c-c-espece-submit" type="submit" tabindex="-1">
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+      
+            <!-- Dailog for Polygon -->
+            <div id="dialog-polygon" title="Polygon Details">
+              <p><small>* all fields are required.</small></p>
+              <form id="c-p-espece" action="/" method="POST">
+                <fieldset>
+                  <div>
+                    <label for="c-p-espece-label">Label * :</label>
+                    <input type="text" id="c-p-espece-label">
+                  </div>
+                  <div>
+                    <label for="c-p-espece-category">category * :</label>
+                    <select id="c-p-espece-category" class="js-select-espece">
+                      <option value="">select a category</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="c-p-espece-color">color *:</label>
+                    <!-- <input type="text" id="c-p-espece-color"> -->
+                    <div class="field-color-wrapper">
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#000" checked="checked"><span class="field-color-box" style="background: #000;">BLACK</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#1abc9c"><span class="field-color-box" style="background: #1abc9c;">#1abc9c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#2ecc71"><span class="field-color-box" style="background: #2ecc71;">#2ecc71</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#3498db"><span class="field-color-box" style="background: #3498db;">#3498db</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#9b59b6"><span class="field-color-box" style="background: #9b59b6;">#9b59b6</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#34495e"><span class="field-color-box" style="background: #34495e;">#34495e</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#f1c40f"><span class="field-color-box" style="background: #f1c40f;">#f1c40f</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#e67e22"><span class="field-color-box" style="background: #e67e22;">#e67e22</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#e74c3c"><span class="field-color-box" style="background: #e74c3c;">#e74c3c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#ecf0f1"><span class="field-color-box" style="background: #ecf0f1;">#ecf0f1</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-p-espece-color" value="#95a5a6"><span class="field-color-box" style="background: #95a5a6;">#95a5a6</span></div>
+                    </div>
+                  </div>
+                  <div>
+                    <input id="c-p-espece-submit" type="submit" tabindex="-1">
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+      
+            <!-- Dailog for Polyline -->
+            <div id="dialog-polyline" title="Polyline Details">
+              <p><small>* all fields are required.</small></p>
+              <form id="c-pl-espece" action="/" method="POST">
+                <fieldset>
+                  <div>
+                    <label for="c-pl-espece-label">Label * :</label>
+                    <input type="text" id="c-pl-espece-label">
+                  </div>
+                  <div>
+                    <label for="c-pl-espece-category">category * :</label>
+                    <select id="c-pl-espece-category" class="js-select-espece">
+                      <option value="">select a category</option>
+                    </select> 
+                  </div>
+                  <div>
+                    <label for="c-pl-espece-pathtype">Path type * :</label>
+                    <select id="c-pl-espece-pathtype">
+                        <option value="">select a type</option>
+                        <option value="outline">select a outline</option>
+                        <option value="track">select a track</option>
+                    </select> 
+                  </div>
+                  <div>
+                    <label for="c-pl-espece-color">color *:</label>
+                    <!-- <input type="text" id="c-pl-espece-color"> -->
+                    <div class="field-color-wrapper">
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#000" checked="checked"><span class="field-color-box" style="background: #000;">BLACK</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#1abc9c"><span class="field-color-box" style="background: #1abc9c;">#1abc9c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#2ecc71"><span class="field-color-box" style="background: #2ecc71;">#2ecc71</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#3498db"><span class="field-color-box" style="background: #3498db;">#3498db</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#9b59b6"><span class="field-color-box" style="background: #9b59b6;">#9b59b6</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#34495e"><span class="field-color-box" style="background: #34495e;">#34495e</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#f1c40f"><span class="field-color-box" style="background: #f1c40f;">#f1c40f</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#e67e22"><span class="field-color-box" style="background: #e67e22;">#e67e22</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#e74c3c"><span class="field-color-box" style="background: #e74c3c;">#e74c3c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#ecf0f1"><span class="field-color-box" style="background: #ecf0f1;">#ecf0f1</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-pl-espece-color" value="#95a5a6"><span class="field-color-box" style="background: #95a5a6;">#95a5a6</span></div>
+                    </div>
+                  </div>
+                  <div>
+                    <input id="c-pl-espece-submit" type="submit" tabindex="-1">
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+      
+            <!-- Dailog for Rectangle -->
+            <div id="dialog-rectangle" title="Polyline Details">
+              <p><small>* all fields are required.</small></p>
+              <form id="c-rec-espece" action="/" method="POST">
+                <fieldset>
+                  <div>
+                    <label for="c-pl-espece-label">Label * :</label>
+                    <input type="text" id="c-rec-espece-label">
+                  </div>
+                  <div>
+                    <label for="c-rec-espece-category">category * :</label>
+                    <select id="c-rec-espece-category" class="js-select-espece">
+                      <option value="">select a category</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="c-p-espece-color">color *:</label>
+                    <!-- <input type="text" id="c-rec-espece-color"> -->
+                    <div class="field-color-wrapper">
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#000" checked="checked"><span class="field-color-box" style="background: #000;">BLACK</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#1abc9c"><span class="field-color-box" style="background: #1abc9c;">#1abc9c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#2ecc71"><span class="field-color-box" style="background: #2ecc71;">#2ecc71</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#3498db"><span class="field-color-box" style="background: #3498db;">#3498db</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#9b59b6"><span class="field-color-box" style="background: #9b59b6;">#9b59b6</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#34495e"><span class="field-color-box" style="background: #34495e;">#34495e</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#f1c40f"><span class="field-color-box" style="background: #f1c40f;">#f1c40f</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#e67e22"><span class="field-color-box" style="background: #e67e22;">#e67e22</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#e74c3c"><span class="field-color-box" style="background: #e74c3c;">#e74c3c</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#ecf0f1"><span class="field-color-box" style="background: #ecf0f1;">#ecf0f1</span></div>
+                      <div class="field-color-field"><input type="radio" name="c-rec-espece-color" value="#95a5a6"><span class="field-color-box" style="background: #95a5a6;">#95a5a6</span></div>
+                    </div>
+                  </div>
+                  <div>
+                    <input id="c-rec-espece-submit" type="submit" tabindex="-1">
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <!--HERE-->
+
+        </div>
+        <div class="mdl-cell mdl-cell--3-col sidebar">
+          <div id="accordion">
+            <a href="#firstBlk" class="first active">Photos (XX)</a>
+            <div id="firstBlk">
+              <div class="sliderCont">
+                <div class="slick js-small-slick">
+                  <div>
+                    <img src="img/slider/bird/img-1.jpg" width="1366" height="768" />
+                  </div>
+                  <div>
+                    <img src="img/slider/bird/img-2.jpg" width="1366" height="768" />
+                  </div>
+                </div>
+                <span class="zoom"><i class="icon-expand"></i></span>
+              </div>
+            </div>
+
+            <a href="#secondBlk">Enregistrements (XX)</a>
+            <div id="secondBlk">
+              <div class="musicList">
+                <form action="javascript:;">
+                  <div>
+                    <label>Votre enregistrement:</label>
+                    <select id="musicList">
+                      <option value="" data-url="">Selectioner votre enregistrement</option>
+                      <option value="1" data-url="http://localhost/atoutlibre_ecologue_html/source/sounds/bird/bird.mp3">Music 1</option>
+                      <option value="2" data-url="http://localhost/atoutlibre_ecologue_html/source/sounds/bird/bird-2.mp3">Music 2</option>
+                    </select>
+                  </div>
+                </form>
+                <div id="player" class="jp-jplayer"></div>
+                <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+                  <div class="jp-type-single">
+                    <div class="jp-gui jp-interface">
+                      <div class="jp-volume-controls">
+                        <button class="jp-mute" role="button" tabindex="0">mute</button>
+                        <button class="jp-volume-max" role="button" tabindex="0">max volume</button>
+                        <div class="jp-volume-bar">
+                          <div class="jp-volume-bar-value"></div>
+                        </div>
+                      </div>
+                      <div class="jp-controls-holder">
+                        <div class="jp-controls">
+                          <button class="jp-play" role="button" tabindex="0">play</button>
+                          <button class="jp-stop" role="button" tabindex="0">stop</button>
+                        </div>
+                        <div class="jp-progress">
+                          <div class="jp-seek-bar">
+                            <div class="jp-play-bar"></div>
+                          </div>
+                        </div>
+                        <div class="jp-current-time" role="timer" aria-label="time">&nbsp;</div>
+                        <div class="jp-duration" role="timer" aria-label="duration">&nbsp;</div>
+                      </div>
+                    </div>
+                    <div class="jp-details">
+                      <div class="jp-title" aria-label="title">&nbsp;</div>
+                    </div>
+                    <div class="jp-no-solution">
+                      <span>Update Required</span>
+                      To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <a href="#thirdBlk">Autre Blocks</a>
+            <div id="thirdBlk">
+              Other info
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="layerSlider" class="layer">
+  <div>
+    <header>
+      <span class="closeLayer icon-close"></span>
+    </header>
+    <div class="sliderCont">
+      <div class="slick js-slick-main">
+        <div>
+          <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+        </div>
+        <div>
+          <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+        </div>
+        <div>
+          <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+        </div>
+        <div>
+          <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+        </div>
+        <div>
+          <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+        </div>
+        <div>
+          <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+        </div>
+        <div>
+          <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+        </div>
+        <div>
+          <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+        </div>
+      </div>
+      <div class="slick js-slick-thumbs">
+      <div>
+        <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+      </div>
+      <div>
+        <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+      </div>
+      <div>
+        <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+      </div>
+      <div>
+        <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+      </div>
+      <div>
+        <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+      </div>
+      <div>
+        <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+      </div>
+      <div>
+        <img src="img/slider/bird/img-1.jpg" width="1366" height="768">
+      </div>
+      <div>
+        <img src="img/slider/bird/img-2.jpg" width="1366" height="768">
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="js/material.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+
+<script type="text/javascript" src="js/datatable/datatables.js"></script>
+<script type="text/javascript" src="js/datatable/jquery-ui/jquery-ui.js"></script>
+<script type="text/javascript" src="js/datatable/pdfmake-0.1.32/pdfmake.js"></script>
+<script type="text/javascript" src="js/datatable/pdfmake-0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" src="js/datatable/Buttons-1.5.1/js/buttons.print.js"></script>
+<script type="text/javascript" src="js/datatable/Buttons-1.5.1/js/buttons.html5.js"></script>
+<script type="text/javascript" src="js/datatable/Buttons-1.5.1/js/buttons.flash.js"></script>
+
+<script type="text/javascript" src="js/jstree.min.js"></script>
+
+<script type="text/javascript" src="js/jplayer/jplayer.js"></script>
+<script type="text/javascript" src="js/slick.js"></script>
+<script type="text/javascript" src="js/treeview.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+
+
+
+<script>
+  //Reff : https://developers.google.com/maps/documentation/javascript/reference/3.exp/drawing#DrawingManager.markercomplete
+
+  //EXPORT POLYLINES empty array
+  var expPolylines = [];
+  var expPolygons = [];
+  var expCircles = [];
+  var expRectangles = [];
+  var expMarkers = [];
+  var infowindow ;
+  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  var labelIndex = 0;
+  var fillColor = "#ffff00";
+  var gmarkers1 = [];
+  var grectangles1 = [];
+  var gcircles1 = [];
+  var gpolygons1 = [];
+  var gpolylines1 = [];
+  var infowindows = [];
+  var countMarker = -1;
+  var countCircle = -1;
+  var countPolygon = -1;
+  var countPolyline = -1;
+  var countRectangle = -1;
+
+  var filterJson = {
+    especes : [
+      {
+        name : "Amphibiens",
+        color : "#ffff00"
+      },
+      {
+        name : "Avifaune",
+        color : "#ffff00"
+      },
+      {
+        name : "Coléoptères",
+        color : "#ffff00"
+      },
+      {
+        name : "Mammifères",
+        color : "#ffff00"
+      },
+      {
+        name : "Odonates",
+        color : "#ffff00"
+      },
+      {
+        name : "Rhopalocères",
+        color : "#ffff00"
+      },
+      {
+        name : "Indice de présence",
+        color : "#000"
+      },
+      {
+        name : "Plante hôte Flore",
+        color : "#ffff00"
+      },
+      {
+        name : "Divers",
+        color : "#ffff00"
+      }
+    ],
+    protocols : [
+      {
+        name : "IPA / RHOPALOCERES"
+      },
+      {
+        name : "PLAQUES REPTILE"
+      },
+      {
+        name : "REPASSE"
+      },
+      {
+        name : "CHIROPTERE"
+      },
+      {
+        name : "POSE DISPOSITIF"
+      },
+      {
+        name : "HABITAT NATUREL"
+      },
+      {
+        name : "ZONE HUMIDE"
+      },
+      {
+        name : "OPPORTUNISTE"
+      }
+    ]
+  };
+
+  var directionsDisplay,
+  directionsService,
+  google,
+  maps;
+  
+  // This example adds a user-editable rectangle to the map.
+  function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      //center: {lat: 44.5452, lng: -78.5389},
+      center: {lat: 46.5442817, lng: 2.4132994},
+      zoom: 6,
+      mapTypeId: 'terrain'
+    });
+
+    
+    $.getJSON("./export/test.json", function(json) {
+      console.log(json); // this will show the info it in firebug console
+      var importData = json;
+    //});
+
+    // Import Default Contents
+    //import rec
+    if(importData.rectangle.length > 0) {
+      for (var i = 0; i < importData.rectangle.length; i++) {
+        var areaBounds = {
+            north: importData.rectangle[i].NElat,
+            south: importData.rectangle[i].SWlat,
+            east: importData.rectangle[i].NElng,
+            west: importData.rectangle[i].SWlng
+        };
+        var rectangle = new google.maps.Rectangle({
+          strokeColor: importData.rectangle[i].fillColor,
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          category: importData.rectangle[i].category,
+          fillColor: importData.rectangle[i].fillColor,
+          fillOpacity: 0.35,
+          map: map,
+          //editable: true,
+          //draggable: true,
+          bounds:areaBounds
+        });
+        rectangle.setMap(map);
+        grectangles1.push(rectangle);
+        expRectangles.push(rectangle);
+        countRectangle++;
+      }
+    }
+    //import circles
+    if(importData.circles.length > 0) {
+      for (var i = 0; i < importData.circles.length; i++) {
+        var cityCircle = new google.maps.Circle({
+            strokeColor: importData.circles[i].fillColor,//importData.circles[i].fillColor,
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: importData.circles[i].fillColor,//importData.circles[i].fillColor,
+            fillOpacity: 0.35,
+            category: importData.circles[i].category,
+            map: map,
+            //editable: true,
+            center: {
+              lat: importData.circles[i].lat,
+              lng: importData.circles[i].lng
+            },
+            //radius: Math.sqrt(importData.circles[i].radius) * 100
+            radius: importData.circles[i].radius
+          });
+          cityCircle.setMap(map);
+          gcircles1.push(cityCircle);
+          expCircles.push(cityCircle);
+                
+          google.maps.event.addListener(cityCircle,'click',function(){
+            console.log('Click' + countCircle);
+            //REMOVE FUNCTIONALITY
+            /*gcircles1[countCircle].setMap(null)
+            expCircles[countCircle].setMap(null)
+            gcircles1.splice(countCircle, 1);
+            expCircles.splice(countCircle, 1);*/
+            //gmarkers1.splice('INDEX TO REMOVE', 'NUMBER TO REMOVE = 1');
+          });
+
+          countCircle++;
+      }
+    }
+    //import marker
+    if(importData.markers.length > 0) {
+      for (var i = 0; i < importData.markers.length; i++) {
+        var marker = new google.maps.Marker({
+          icon: {
+            path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+            scale: 5,
+            strokeWeight: 2,
+            strokeColor: importData.markers[i].markerColor,
+            fillColor: importData.markers[i].markerColor,
+            fillOpacity: 0.5
+          },
+          markerColor : importData.markers[i].markerColor,
+          position:  {
+              lat: importData.markers[i].lat,
+              lng: importData.markers[i].lng
+            },
+          map: map,
+          category: importData.markers[i].category,
+          label: importData.markers[i].title,
+          //draggable: true,
+          title: importData.markers[i].title
+        });
+
+        gmarkers1.push(marker);
+        expMarkers.push(marker);
+        countMarker++;
+        
+        var infowindow = new google.maps.InfoWindow({
+          //content: '<div id="content">'+'Test content'+countMarker+' <a href="#" class="js-mode-map-edit-btn " onmousedown="updateDialog('+countMarker+')">edit</a></div>',
+          content: '<div id="content">'+importData.markers[i].infowindow.content+' <a href="#" class="js-mode-map-edit-btn " onmousedown="updateDialog('+countMarker+')">edit</a></div>',
+          maxWidth: 300
+        });
+        infowindows.push(infowindow);
+      }
+    }
+    //For infowindow
+    if(infowindows.length > 0) {
+      gmarkers1.forEach(function(gmarkerSingle, index) {
+        gmarkers1[index].addListener('click', function() {
+          infowindows[index].open(map, gmarkers1[index]);
+        });
+      });
+    }
+    
+    //import Polylines
+    if(importData.polylines.length > 0) {
+      for (var i = 0; i < importData.polylines.length; i++) {
+        var imPpolylines = [];
+        for (var j = 0; j < importData.polylines[i].path.length; j++) {
+          imPpolylines.push(
+            {
+              lat: parseFloat(importData.polylines[i].path[j].split(',')[0]),
+              lng: parseFloat(importData.polylines[i].path[j].split(',')[1])
+            }
+          );
+        }
+        
+        if (importData.polylines[i].pathType == 'track') {
+          var polyPath = new google.maps.Polyline({
+            icons: [{
+              icon: {
+                path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+              },
+              offset: '100%'
+            }],
+            path: imPpolylines,
+            category: importData.polylines[i].category,
+            geodesic: true,
+            strokeColor: importData.polylines[i].fillColor,
+            //editable: true,
+            pathType : 'track',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+        } else {
+          var polyPath = new google.maps.Polyline({
+            path: imPpolylines,
+            category: importData.polylines[i].category,
+            geodesic: true,
+            strokeColor: importData.polylines[i].fillColor,
+            //editable: true,
+            pathType : 'outline',
+            strokeOpacity: 1.0,
+            strokeWeight: 2
+          });
+        }
+
+        polyPath.setMap(map);
+        gpolylines1.push(polyPath);
+        expPolylines.push(polyPath);
+        countPolyline++;
+      }
+    }
+    //import Polygons
+    if(importData.polygons.length > 0) {
+      for (var i = 0; i < importData.polygons.length; i++) {
+        var imPpolygons = [];
+        for (var j = 0; j < importData.polygons[i].path.length; j++) {
+          imPpolygons.push(
+            {
+              lat: parseFloat(importData.polygons[i].path[j].split(',')[0]),
+              lng: parseFloat(importData.polygons[i].path[j].split(',')[1])
+            }
+          );
+        }
+        var polygonPath = new google.maps.Polygon({
+          paths: imPpolygons,
+          strokeColor: importData.polygons[i].fillColor,
+          //editable: true,
+          category: importData.polygons[i].category,
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: importData.polygons[i].fillColor,
+          fillOpacity: 0.35
+        });
+        polygonPath.setMap(map);
+        gpolygons1.push(polygonPath);
+        expPolygons.push(polygonPath);
+        countPolygon++;
+      }
+    }
+  ///////////
+  /*Set bounces*/
+    var bounds = new google.maps.LatLngBounds();
+    for (var i = 0; i < gmarkers1.length; i++) {
+      bounds.extend(gmarkers1[i].getPosition());
+    }
+    map.fitBounds(bounds);
+    });
+  ///////////
+    var drawingManager = new google.maps.drawing.DrawingManager({
+      drawingMode: null,
+      drawingControl: true,
+      drawingControlOptions: {
+        position: google.maps.ControlPosition.TOP_CENTER,
+        drawingModes: ['marker', 'circle', 'polygon', 'polyline', 'rectangle']
+      },
+      markerOptions: {
+        icon: {
+          path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+          scale: 5,
+          strokeWeight: 2,
+          strokeColor:"#000",
+          fillColor: '#000',
+          fillOpacity: 0.5
+        }
+        //icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png'
+      },
+      
+      circleOptions: {
+        fillColor: fillColor,
+        fillOpacity: 0.5,
+        strokeWeight: 2,
+        clickable: true,
+        editable: true,
+        draggable: true,
+        category : 'default',
+        zIndex: 1
+      },
+      polygonOptions: {
+        fillColor: fillColor,
+        fillOpacity: 0.5,
+        strokeWeight: 2,
+        clickable: true,
+        editable: true,
+        draggable: true,
+        category : 'Divers',
+        zIndex: 1
+      },
+      polylineOptions: {
+        strokeColor : fillColor,
+        strokeOpacity: 1.0,
+        strokeWeight: 5,
+        clickable: true,
+        editable: true,
+        draggable: true,
+        category : 'Divers',
+        geodesic: true,
+        zIndex: 1
+      },
+      rectangleOptions: {
+        fillColor: fillColor,
+        fillOpacity: 0.5,
+        strokeWeight: 2,
+        clickable: true,
+        category : 'Divers',
+        editable: true,
+        draggable: true,
+        zIndex: 1
+      }
+    });
+    drawingManager.setMap(map);
+        
+    google.maps.event.addListener(drawingManager, 'overlaycomplete', function(event) {
+      //Markers
+      if (event.type == google.maps.drawing.OverlayType.MARKER) {
+        $( "#dialog-marker" ).dialog( "open" );
+        var lableText = labels[labelIndex++ % labels.length];
+        event.overlay.setTitle(lableText);
+        event.overlay.setLabel(lableText);
+        event.overlay.setOptions({
+          label: 'marker ' + countMarker
+        });
+        
+        expMarkers.push(event.overlay);
+        gmarkers1.push(event.overlay);
+
+        
+        var infowindow = new google.maps.InfoWindow({
+          content: '<div id="content">'+'Test content'+' <a href="#" onmousedown="updateDialog('+countMarker+')">edit</a></div>',
+          maxWidth: 300
+        });
+        google.maps.event.addListener(event.overlay,'click',function(){
+          infowindow.open(map,event.overlay);
+        });
+        infowindows.push(infowindow);
+        
+        $( "#c-m-espece" ).on( "submit", function( e ) {
+          e.preventDefault();
+          var updateLabel = document.getElementById('c-m-espece-label').value;
+          var updateCategory = document.getElementById('c-m-espece-category').value;
+          //var fillColor = document.getElementById('c-m-espece-color').value;
+          var updateDesc = document.getElementById('c-m-espece-desc').value;
+          
+          var fillColors = document.getElementsByName('c-m-espece-color');
+          var fillColor = '#000';
+          for (var i = 0, length = fillColors.length; i < length; i++) {
+              if (fillColors[i].checked) {
+                fillColor = fillColors[i].value;
+                break;
+              }
+          }
+
+          gmarkers1[countMarker].setOptions(
+            {
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                scale: 5,
+                strokeWeight: 2,
+                strokeColor: fillColor ? fillColor : '#000',
+                fillColor: fillColor ? fillColor : '#000',
+                fillOpacity: 0.5
+              },
+              markerColor: fillColor ? fillColor : '#000',
+              label : updateLabel,
+              category : updateCategory
+            }
+          );
+          expMarkers[countMarker].setOptions(
+            {
+              icon: {
+                path: google.maps.SymbolPath.BACKWARD_CLOSED_ARROW,
+                scale: 5,
+                strokeWeight: 2,
+                strokeColor: fillColor ? fillColor : '#000',
+                fillColor: fillColor ? fillColor : '#000',
+                fillOpacity: 0.5
+              },
+              markerColor: fillColor ? fillColor : '#000',
+              label : updateLabel,
+              category : updateCategory
+            }
+          );
+          $( "#dialog-marker" ).dialog( "close" );
+          infowindows[countMarker].setContent(
+            '<div id="content">'+updateDesc+' <a href="#" class="js-mode-map-edit-btn " onmousedown="updateDialog('+countMarker+')">edit</a></div>'
+          );
+        });
+
+        countMarker++;
+      } //End Of Marker overlay
+
+      if (event.type == google.maps.drawing.OverlayType.CIRCLE) {
+        $( "#dialog-circle" ).dialog( "open" );
+        gcircles1.push(event.overlay);
+        expCircles.push(event.overlay);
+        $( "#c-c-espece" ).on( "submit", function( e ) {
+          e.preventDefault();
+          var updateLabel = document.getElementById('c-c-espece-label').value;
+          var updateCategory = document.getElementById('c-c-espece-category').value;
+          //var updateColor = document.getElementById('c-c-espece-color').value;
+          
+          var updateColors = document.getElementsByName('c-c-espece-color');
+          var updateColor = '#000';
+          for (var i = 0, length = updateColors.length; i < length; i++) {
+              if (updateColors[i].checked) {
+                updateColor = updateColors[i].value;
+                break;
+              }
+          }
+
+
+          gcircles1[countCircle].setOptions(
+            {
+              label : updateLabel,
+              category : updateCategory,
+              fillColor : updateColor
+            }
+          );
+          expCircles[countCircle].setOptions(
+            {
+              label : updateLabel,
+              category : updateCategory,
+              fillColor : updateColor
+            }
+          );
+          $( "#dialog-circle" ).dialog( "close" );
+        });
+        
+        google.maps.event.addListener(event.overlay,'click',function(){
+          console.log('Click' + countCircle);
+          //REMOVE FUNCTIONALITY
+          /*gcircles1[countCircle].setMap(null)
+          expCircles[countCircle].setMap(null)
+          gcircles1.splice(countCircle, 1);
+          expCircles.splice(countCircle, 1);*/
+          //gmarkers1.splice('INDEX TO REMOVE', 'NUMBER TO REMOVE = 1');
+        });
+        countCircle++;
+      }
+      if (event.type == google.maps.drawing.OverlayType.POLYGON) {
+        $( "#dialog-polygon" ).dialog( "open" );
+        gpolygons1.push(event.overlay);
+        expPolygons.push(event.overlay);
+        $( "#c-p-espece" ).on( "submit", function( e ) {
+          e.preventDefault();
+          var updateLabel = document.getElementById('c-p-espece-label').value;
+          var updateCategory = document.getElementById('c-p-espece-category').value;
+          //var updateColor = document.getElementById('c-p-espece-color').value;
+          
+          var updateColors = document.getElementsByName('c-p-espece-color');
+          var updateColor = '#000';
+          for (var i = 0, length = updateColors.length; i < length; i++) {
+              if (updateColors[i].checked) {
+                updateColor = updateColors[i].value;
+                break;
+              }
+          }
+
+          
+          gpolygons1[countPolygon].setOptions(
+            {
+              label : updateLabel,
+              category : updateCategory,
+              fillColor : updateColor
+            }
+          );
+          expPolygons[countPolygon].setOptions(
+            {
+              label : updateLabel,
+              category : updateCategory,
+              fillColor : updateColor
+            }
+          );
+          $( "#dialog-polygon" ).dialog( "close" );
+        });
+        countPolygon++;
+      }
+      if (event.type == google.maps.drawing.OverlayType.POLYLINE) {
+        $( "#dialog-polyline" ).dialog( "open" );
+        gpolylines1.push(event.overlay);
+        expPolylines.push(event.overlay);
+        $( "#c-pl-espece" ).on( "submit", function( e ) {
+          e.preventDefault();
+          var updateLabel = document.getElementById('c-pl-espece-label').value;
+          var updateCategory = document.getElementById('c-pl-espece-category').value;
+          //var updateColor = document.getElementById('c-pl-espece-color').value;
+          var updateType = document.getElementById('c-pl-espece-pathtype').value;
+          
+          var updateColors = document.getElementsByName('c-pl-espece-color');
+          var updateColor = '#000';
+          for (var i = 0, length = updateColors.length; i < length; i++) {
+              if (updateColors[i].checked) {
+                updateColor = updateColors[i].value;
+                break;
+              }
+          }
+          
+          if (updateType == 'track') {
+            gpolylines1[countPolyline].setOptions(
+              {
+                icons: [{
+                  icon: {
+                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+                  },
+                  offset: '100%'
+                }],
+                label : updateLabel,
+                category : updateCategory,
+                strokeColor : updateColor,
+                pathType : updateType
+              }
+            );
+            expPolylines[countPolyline].setOptions(
+              {
+                icons: [{
+                  icon: {
+                    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+                  },
+                  offset: '100%'
+                }],
+                label : updateLabel,
+                category : updateCategory,
+                strokeColor : updateColor,
+                pathType : updateType
+              }
+            );
+          } else {
+            gpolylines1[countPolyline].setOptions(
+              {
+                label : updateLabel,
+                category : updateCategory,
+                strokeColor : updateColor,
+                pathType : updateType
+              }
+            );
+            expPolylines[countPolyline].setOptions(
+              {
+                label : updateLabel,
+                category : updateCategory,
+                strokeColor : updateColor,
+                pathType : updateType
+              }
+            );
+          }
+          $( "#dialog-polyline" ).dialog( "close" );
+        });
+        countPolyline++;
+      }
+
+      if (event.type == google.maps.drawing.OverlayType.RECTANGLE) {
+        $( "#dialog-rectangle" ).dialog( "open" );
+        grectangles1.push(event.overlay);
+        expRectangles.push(event.overlay);
+        $( "#c-rec-espece" ).on( "submit", function( e ) {
+          e.preventDefault();
+          var updateLabel = document.getElementById('c-rec-espece-label').value;
+          var updateCategory = document.getElementById('c-rec-espece-category').value;
+          //var updateColor = document.getElementById('c-rec-espece-color').value;
+          
+          var updateColors = document.getElementsByName('c-rec-espece-color');
+          var updateColor = '#000';
+          for (var i = 0, length = updateColors.length; i < length; i++) {
+              if (updateColors[i].checked) {
+                updateColor = updateColors[i].value;
+                break;
+              }
+          }
+          
+          grectangles1[countRectangle].setOptions(
+            {
+              label : updateLabel,
+              category : updateCategory,
+              fillColor : updateColor
+            }
+          );
+          expRectangles[countRectangle].setOptions(
+            {
+              label : updateLabel,
+              category : updateCategory,
+              fillColor : updateColor
+            }
+          );
+          $( "#dialog-rectangle" ).dialog( "close" );
+        });
+        countRectangle++;
+      }
+    });
+
+//REFF : http://jsfiddle.net/jpEwM/
+//REFF : COLOR http://bl.ocks.org/knownasilya/89a32e572989f0aff1f8
+
+//Export polylines
+google.maps.event.addDomListener(document.getElementById('btnExport'), 'click', function() {
+  var htmlStr = "";
+  var expJson = {
+    polylines : [],
+    polygons : [],
+    circles : [],
+    rectangle : [],
+    markers : []
+  };
+  
+  //Polylines
+  if(expPolylines.length > 0) {
+    for (var i = 0; i < expPolylines.length; i++) {
+      var polylinePath = [];
+      for (var j = 0; j < +expPolylines[i].getPath().getLength(); j++) {
+        polylinePath.push(expPolylines[i].getPath().getAt(j).toUrlValue(6));
+      }
+      var pushPolylinePath = {
+        name: 'test',
+        fillColor: expPolylines[i].strokeColor,
+        path : polylinePath,
+        category : expPolylines[i].category,
+        pathType : expPolylines[i].pathType ? expPolylines[i].pathType : 'outline'
+      }
+      expJson.polylines.push(pushPolylinePath);
+    }
+  }
+
+  //Polygons
+  if(expPolygons.length > 0) {
+    for (var i = 0; i < expPolygons.length; i++) {
+      var polygonPath = [];
+      
+      for (var j = 0; j < +expPolygons[i].getPath().getLength(); j++) {
+        polygonPath.push(expPolygons[i].getPath().getAt(j).toUrlValue(6));
+      }
+      var pushPolygonPath = {
+        name: 'test',
+        fillColor: expPolygons[i].fillColor,
+        category : expPolygons[i].category ? expPolygons[i].category : 'Divers' ,
+        path : polygonPath
+      }
+      expJson.polygons.push(pushPolygonPath);
+    }
+  }
+  
+  //Circles
+  if(expCircles.length > 0) {
+    for (var i = 0; i < expCircles.length; i++) {
+      var circlePath = {};
+      circlePath = {
+        lat : expCircles[i].getCenter().lat(),
+        lng : expCircles[i].getCenter().lng(),
+        fillColor : expCircles[i].fillColor,
+        category : expCircles[i].category,
+        radius : expCircles[i].radius
+      }
+      expJson.circles.push(circlePath);
+    }
+  }
+  
+  //Rectangles
+  if(expRectangles.length > 0) {
+    for (var i = 0; i < expRectangles.length; i++) {
+      var rectanglePath = {};
+     
+      rectanglePath = {
+        NElat : expRectangles[i].getBounds().getNorthEast().lat(),
+        NElng : expRectangles[i].getBounds().getNorthEast().lng(),
+        SWlat : expRectangles[i].getBounds().getSouthWest().lat(),
+        SWlng : expRectangles[i].getBounds().getSouthWest().lng(),
+        category : expRectangles[i].category,
+        fillColor : expRectangles[i].fillColor
+      }
+      expJson.rectangle.push(rectanglePath);
+    }
+  }
+  
+  //Markers
+  if(expMarkers.length > 0) {
+    
+    for (var i = 0; i < expMarkers.length; i++) {
+      var markerPath = {};
+      markerPath = {
+        title : expMarkers[i].label,
+        lat : expMarkers[i].getPosition().lat(),
+        lng : expMarkers[i].getPosition().lng(),
+        markerColor : expMarkers[i].icon.fillColor ? expMarkers[i].icon.fillColor : '#000',
+        category : expMarkers[i].category,
+        infowindow : {
+          content : infowindows[i].getContent().replace(/<(.|\n)*?>/g, '')
+        }
+      }
+      expJson.markers.push(markerPath);
+    }
+  }
+  console.log(expJson);
+  alert('Exporting drawings');
+  $.ajax
+    ({
+        type: "POST",
+        dataType : 'json',
+        async: false,
+        url: './export/save_json.php',
+        data: { data: JSON.stringify(expJson) },
+        success: function () {alert("Thanks!"); },
+        failure: function() {alert("Error!");}
+    });
+    htmlStr = "Drawing exported";
+  document.getElementById('output').innerHTML = htmlStr;
+});
+
+
+      //REFF : http://jsfiddle.net/drytwvL8/1116/
+      filterByEspece = function (category) {
+          for (i = 0; i < gmarkers1.length; i++) {
+            
+              marker = gmarkers1[i];
+              // If is same category or category not picked
+              if (marker.category == category || category.length === 0) {
+                  marker.setVisible(true);
+              }
+              // Categories don't match 
+              else {
+                  marker.setVisible(false);
+              }
+          }
+          for (i = 0; i < grectangles1.length; i++) {
+            rectangle = grectangles1[i];
+            if (rectangle.category == category || category.length === 0) {
+              rectangle.setVisible(true);
+            }
+            else {
+              rectangle.setVisible(false);
+            }
+          }
+          for (i = 0; i < gcircles1.length; i++) {
+            circle = gcircles1[i];
+            if (circle.category == category || category.length === 0) {
+              circle.setVisible(true);
+            }
+            else {
+              circle.setVisible(false);
+            }
+          }
+          for (i = 0; i < gpolygons1.length; i++) {
+            polygon = gpolygons1[i];
+            if (polygon.category == category || category.length === 0) {
+              polygon.setVisible(true);
+            }
+            else {
+              polygon.setVisible(false);
+            }
+          }
+          for (i = 0; i < gpolylines1.length; i++) {
+            polyline = gpolylines1[i];
+            if (polyline.category == category || category.length === 0) {
+              polyline.setVisible(true);
+            }
+            else {
+              polyline.setVisible(false);
+            }
+          }
+      }
+
+      window.updateDialog = function (opt) {
+      //function updateDialog (opt) {
+        var opt = opt;
+        
+        $( "#dialog-marker-edit" ).dialog( "open" );
+        $( "#c-m-edit-espece" ).on( "submit", function( e ) {
+          e.preventDefault();
+          var updateDesc = document.getElementById('c-m-edit-espece-desc').value;
+          infowindows[opt].setContent(
+            '<div id="content">Infowindow no: '+updateDesc+' <a href="#" class="js-mode-map-edit-btn " onmousedown="updateDialog('+opt+')">edit</a></div>'
+          );
+          $( "#dialog-marker-edit" ).dialog( "close" );
+        });
+      }
+
+      //REMOVE FUNCTIONALITY
+      //gmarkers1[0].setMap(null)
+      //expMarkers[0].setMap(null)
+      //gmarkers1.splice(0, 1);
+      //gmarkers1.splice('INDEX TO REMOVE', 'NUMBER TO REMOVE = 1');
+      //expMarkers.splice(0, 1);
+
+    } //OF INIT
+    
+    
+    
+    jQuery(function(){
+      $( "#dialog-circle, #dialog-marker, #dialog-marker-edit, #dialog-polygon, #dialog-polyline, #dialog-rectangle" ).dialog({
+        autoOpen: false,
+        show: {
+          effect: "bounce",
+          duration: 1000
+        },
+        hide: {
+          effect: "fade",
+          duration: 1000
+        }
+      });
+
+      var $filterByEspeceSelect = $(".js-select-espece");
+      for(var j = 0; j < filterJson.especes.length; j++) {
+        $filterByEspeceSelect.append('<option value="'+filterJson.especes[j].name+'">'+filterJson.especes[j].name+'</option>');
+      };
+      
+      //.js-mode-map-edit
+      //.js-mode-map-build
+      $('.js-mode-map-edit-btn').hide();
+      $('.js-mode-map-edit').on('click', function(e){
+        e.preventDefault();
+        $('.js-mode-map-edit-btn').show();
+        $('.js-mode-map-edit-btn').css('display','block');
+
+        if(gmarkers1.length > 0) {
+          gmarkers1.forEach(function(entry, index) {
+            entry.setOptions({
+              draggable: true
+            });
+          });
+        }
+        if(grectangles1.length > 0) {
+          grectangles1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: true,
+              draggable: true
+            });
+          });
+        }
+        if(gcircles1.length > 0) {
+          gcircles1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: true,
+              draggable: true
+            });
+          });
+        }
+        if(gpolygons1.length > 0) {
+          gpolygons1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: true,
+              draggable: true
+            });
+          });
+        }
+        if(gpolylines1.length > 0) {
+          gpolylines1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: true,
+              draggable: true
+            });
+          });
+        }
+      });
+      $('.js-mode-map-build').on('click', function(e){
+        e.preventDefault();
+        $('.js-mode-map-edit-btn').hide();
+        $('.js-mode-map-edit-btn').css('display','none');
+
+        if(gmarkers1.length > 0) {
+          gmarkers1.forEach(function(entry, index) {
+            entry.setOptions({
+              draggable: false
+            });
+          });
+        }
+        if(grectangles1.length > 0) {
+          grectangles1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: false,
+              draggable: false
+            });
+          });
+        }
+        if(gcircles1.length > 0) {
+          gcircles1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: false,
+              draggable: false
+            });
+          });
+        }
+        if(gpolygons1.length > 0) {
+          gpolygons1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: false,
+              draggable: false
+            });
+          });
+        }
+        if(gpolylines1.length > 0) {
+          gpolylines1.forEach(function(entry, index) {
+            entry.setOptions({
+              editable: false,
+              draggable: false
+            });
+          });
+        }
+      });
+    });
+
+  </script>
+  <script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQ3_U1oKhq1oQsnrK6y8k6q64BO9O3vFg&libraries=drawing,visualization,geometry&callback=initMap">
+  </script>
+</body>
+</html>
