@@ -1,0 +1,214 @@
+.blockMain {
+  height: calc(100vh - 50px);
+  overflow: auto;
+  background: $colBlanc;
+}
+.screenMode {
+  float: left;
+  width: 100%;
+  padding: 8px;
+  border-bottom: 1px solid $colBorder;
+  span {
+    float: right;
+    cursor: pointer;
+    em {
+      font-style: normal;
+      display: none !important;
+      &:first-child {
+        display: none;
+      }
+    }
+    &:before {
+      font-family: 'icomoon' !important;
+      content: '\e906';
+      font-size: 20px;
+      float: left;
+      font-weight: bold;
+    }
+    &.active {
+      em {
+        display: none;
+        &:first-child {
+          display: inline-block;
+        }
+      }
+    }
+  }
+}
+.mainContent {
+  &.wide {
+    width: 100% !important;
+    .blockMain {
+      width: 100% !important;
+    }
+  }
+}
+.navigation {
+  &.unwide {
+    position: absolute;
+    left: -100%;
+  }
+}
+.sidebar {
+  &.unwide {
+    position: absolute;
+    right: -100%;
+  }
+}
+
+i.arrow-border {
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+.down {
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
+
+
+.mdl-custom {
+  &-datatable-drawer {
+    width: 320px;
+    -webkit-transform: translateX(330px);
+    transform: translateX(330px);
+    right: 0;
+    left: auto;
+     > div {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+     }
+  }
+  &-selectfield {
+    &--label {
+      position: absolute;
+      top: 0;
+      padding: 20px 0 0 20px;
+      -webkit-transition: all 0.3s ease-out;
+      -moz-transition: all 0.3s ease-out;
+      -o-transition: all 0.3s ease-out;
+      transition: all 0.3s ease-out;
+      &.active {
+        padding-top: 0;
+        color: $colOpac5;
+      }
+    }
+    &--value {
+      position: relative;
+      display: block;
+      padding: 20px 0px 0 20px;
+      min-height: 60px;
+      &:after {
+        content: "";
+        position: absolute;
+        width: 0; 
+        height: 0; 
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 6px solid;
+        right: 0;
+        top: 24px;
+        vertical-align: middle;
+      }
+    }
+    &--list {
+      position: absolute;
+      background:$colBlanc;
+      z-index: 5;
+      top: 75%;
+      .mdl-textfield  {
+        width: 100%;
+      }
+      .mdl-list__item {
+        font-size: 13px;
+        padding: 8px 20px;
+        &.active{
+          background: $colOpac1;
+        }
+        .mdl-list__item-secondary-action {
+          margin-left: 10px;
+        }
+
+        &--with-search {
+          border-bottom: 1px solid $colBorder;
+          padding: 0 10px;
+          .mdl-textfield {
+            width: 100%;
+            input, label {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+
+    }
+    &-chips {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    position: relative;
+    width: 300px;
+    max-width: 100%;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}
+
+
+.pg-loader {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background: $colWOpac7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+.custom-vue-select {
+  display: inline-block;
+  padding: 5px;
+  width: auto;
+  min-width: 300px;
+  .multiselect__select {
+    top: 8px;
+    &:before {
+      border-color: $colNoir transparent transparent;
+    }
+  }
+  .multiselect__tag {
+    display: inline-flex;
+    margin-bottom: 5px;
+  }
+  .multiselect__tags {
+    border: 0;
+    border-bottom: 1px solid;
+    border-radius: 0;
+  }
+  .multiselect__tags, .multiselect__single {
+    background: transparent;
+  }
+  .multiselect__input, .multiselect__single, .multiselect__tags, .multiselect__content {
+    font-size: 13px;
+    background: transparent;
+  }
+  .multiselect__option:after {
+    font-size: 12px;
+    line-height: 38px;
+  }
+}

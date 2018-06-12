@@ -1,0 +1,215 @@
+.blk-filterbar {
+  float: left;
+  width: 100%;
+  background: $colBlanc;
+  padding: 10px 20px;
+  font-size: 13px;
+  border-bottom: 1px solid #bbb;
+
+  &-breadcrum {
+    background: $accent-color-3;
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    li {
+      padding:8px 20px;
+    }
+    .dropdownmenu {
+      > ul {
+        li {         
+          pointer-events: none;
+          padding: 0;
+        }
+      } 
+    }
+  }
+
+  &-submit {
+    text-align: center;
+    .mdl-button {
+      padding: 6px;
+      height: auto;
+      min-width: 200px;
+      color: $colBlanc;
+      background: $accent-color-4;
+    }
+    padding: 15px 0;
+  }
+  
+  &-chip {
+    .mdl-chip {
+      margin-bottom: 10px;
+      height: 26px;
+      line-height: 1;
+    }
+    .mdl-chip__action {
+      height: 20px;
+    }
+    .material-icons {
+      font-size: 20px;
+    }
+  }
+  &-list {
+    &-cont {
+      display: flex;
+      justify-content: space-around;
+      padding: 15px 0;
+      .mdl-list {
+        //min-width: 240px;
+        //max-width: 270px;
+        //padding: 10px;
+        padding: 0;
+        background: lighten($light-grey, 5%);
+        border-radius: 2px;
+        font-size: 13px;
+        /* one item */
+        &:first-child:nth-last-child(1) {
+        /* -or- li:only-child { */
+            width: 100%;
+        }
+
+        /* two items */
+        &:first-child:nth-last-child(2),
+        &:first-child:nth-last-child(2) ~ .mdl-list {
+            width: 48%;
+        }
+
+        /* three items */
+        &:first-child:nth-last-child(3),
+        &:first-child:nth-last-child(3) ~ .mdl-list {
+            width: 31%;
+        }
+
+        /* four items */
+        &:first-child:nth-last-child(4),
+        &:first-child:nth-last-child(4) ~ .mdl-list {
+            width: 23%;
+        }
+        &__item {
+          padding: 5px 16px;
+          min-height: 28px;
+          font-size: 13px;
+          color: darken($light-grey, 50%);
+          &-title {
+            padding: 10px 16px;
+            border-radius: 2px 2px 0 0;
+            background: lighten($light-grey, 7%);
+            font-size: 14px;
+            span {
+              display: block;
+              font-weight: 600;
+            }
+          }
+          &-all {
+            border-bottom: 2px solid $colOpac2;
+          }
+          &-secondary-action {
+            margin-left: 12px;
+          }
+          &-items {
+            padding: 0;
+            > ul {
+              max-height: 260px;
+              background: transparent;
+              overflow: hidden;
+              overflow-y: auto;
+              width: 100%;
+              border-radius: 0;
+              padding: 10px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  &-select {
+    &-level{
+      &-1 {
+        margin-left: 10px;
+      }
+      &-2 {
+        margin-left: 30px;
+      }
+      &-3 {
+        margin-left: 50px;
+      }
+      &-4 {
+        margin-left: 70px;
+      }
+    }
+    &-items {
+      width: 100%;
+      background: $accent-color-4;
+      margin: 5px 0;
+      display: flex;
+      align-items:center;
+      border-radius: 5px;
+      //flex-wrap: wrap;
+      .mdl-custom-selectfield, .custom-vue-select {
+        color: $colBlanc;
+        .multiselect__content-wrapper {
+          color: $colOpac7;
+        }
+        .multiselect__select:before {
+          border-color: $colBlanc transparent transparent;
+        }
+      }
+      .mdl-chip {
+        margin: 10px 5px;
+        background: $colWOpac7;
+        height: 26px;
+        line-height: 26px;
+        padding: 0 12px;
+        .mdl-chip__action {
+          margin: 2px 0px -1px 4px;
+        }
+        .material-icons {
+          font-size: 20px;
+        }
+      }
+    }
+    &-items--row {
+      display: flex;
+      align-items:flex-start;
+      justify-content: space-around;
+      .custom-vue-select {
+        width: 33%;
+      }
+    }
+    &-cont {
+      width: 100%;
+
+      .mdl-selectfield {
+        border-radius: 2px;
+        line-height: 13px;
+        padding: 16px;
+        display: block;
+      }
+      .mdl-selectfield__box,
+      .mdl-selectfield__label {
+        width: 85%;
+        margin: 0 auto;
+      }
+      .mdl-selectfield__select {
+        background: transparent;
+      }
+      .mdl-selectfield__select, 
+      .mdl-selectfield__label, 
+      .mdl-selectfield__box .mdl-selectfield__box-value {
+        font-size: 13px;
+        color: $colBlanc;
+      }
+      .mdl-selectfield__box>.mdl-selectfield__arrow-down__container {
+        padding-right: 10px;
+        padding-left: 10px;
+      }
+      .mdl-selectfield__list-option-box ul>li {
+        font-size: 14px;
+        line-height: 16px;
+        min-height: 16px;
+      }
+    }
+  }
+}

@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Ecologue - Datatable</title>
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="description" content="meta desc">
+  <link rel="stylesheet"href="css/material.css">
+  <link rel="stylesheet"href="js/datatable/datatables.css">
+  <link rel="stylesheet"href="js/datatable/jquery-ui/jquery-ui.css">
+  <link rel="stylesheet"href="css/screen.css">
+  <style>
+        #example .footer-row-search {
+            display: table-row-group;
+        }
+        #example .footer-total-count {
+            display: table-footer-group;
+        }
+        th p {
+            margin: 0;
+        }
+  </style>
+
+</head>
+
+<body>
+<div class="mdl-layout__container">
+  <header>
+    Header
+  </header>
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--12-col">
+        <table id="example" class="display" width="100%">
+            <thead class="footer-row-search ">
+                <tr>
+                    <th class="js-filter-def"><span>Name</span></th>
+                    <th class="js-filter-def"><span>Position</span></th>
+                    <th class="js-filter-def"><span>Office</span></th>
+                    <th class="js-filter-def"><span>Extn.</span></th>
+                    <th class="js-filter-def js-col-date"><span>Start date</span></th>
+                    <th class="js-filter-def js-col-currency"><span>Salary</span></th>
+                </tr>
+                <tr class="js-row-search">
+                    <th class="js-filter-def">Name</th>
+                    <th class="js-filter-def">Position</th>
+                    <th class="js-filter-def">Office</th>
+                    <th class="js-filter-def js-filter-num">Extn.</th>
+                    <th class="js-filter-def js-col-date">Start date</th>
+                    <th class="js-filter-def">Salary</th>
+                </tr>
+            </thead>
+            <tfoot class="footer-total-count js-total-count">
+                <tr>
+                    <th>-</th>
+                    <th>-</th>
+                    <th>-</th>
+                    <td class="js-total-num">-</td>
+                    <th>-</th>
+                    <td class="js-total-currency">-</td>
+                </tr>
+            </tfoot>
+        </table>
+        
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" src="js/material.js"></script>
+<script type="text/javascript" src="js/datatable/jQuery-3.2.1/jquery-3.2.1.js"></script>
+<script type="text/javascript" src="js/datatable/datatables.js"></script>
+
+<script type="text/javascript" src="js/datatable/Buttons-1.5.1/js/buttons.flash.js"></script>
+<script type="text/javascript" src="js/datatable/pdfmake-0.1.32/pdfmake.js"></script>
+<script type="text/javascript" src="js/datatable/pdfmake-0.1.32/vfs_fonts.js"></script>
+<script type="text/javascript" src="js/datatable/Buttons-1.5.1/js/buttons.html5.js"></script>
+<script type="text/javascript" src="js/datatable/Buttons-1.5.1/js/buttons.print.js"></script>
+
+<script type="text/javascript" src="js/datatable/jquery-ui/jquery-ui.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

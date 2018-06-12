@@ -1,0 +1,48 @@
+// Default Normalize/Reset for websites
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section,
+summary {
+    display: block;
+}
+ul, ol, li {
+   list-style: none;
+   padding: 0;
+   margin: 0;
+}
+a {
+  color: $colMain;
+  text-decoration: none;
+}
+
+.noMargin {
+ margin: 0 !important;
+}
+.noPadding {
+  padding: 0 !important;
+}
+
+* {
+  box-sizing: border-box; -moz-box-sizing: border-box; -webkit-box-sizing: border-box;
+}
+
+/** Default settings **/
+body {
+  font-size: 13px;
+  font-family: $montserratReg; //robotoReg
+  color: $colMain;
+  background-color: #f2f2f2;
+}
+button {
+  outline: none;
+}
+input, select, textarea {
+  font-size: 13px;
+}
