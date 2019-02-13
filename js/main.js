@@ -75,5 +75,12 @@
         },delay);
     });
 
-
+    var url = "https://api.themoviedb.org/3/movie/"+movieId+"?api_key="+apiKey;
+    axios.get(url)
+    .then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.log(error);
+    });
 })(jQuery);
